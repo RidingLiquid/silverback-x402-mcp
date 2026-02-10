@@ -1,0 +1,64 @@
+{
+  "name": "@silverback/x402-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Silverback DeFi — 26 intelligence endpoints via x402 micropayments. Swap routing, yield analysis, token audits, whale tracking, and more.",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": {
+    "silverback-x402-mcp": "dist/index.js"
+  },
+  "files": [
+    "dist/",
+    "README.md",
+    "LICENSE"
+  ],
+  "license": "MIT",
+  "author": "Silverback DeFi",
+  "homepage": "https://x402.silverbackdefi.app",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/RidingLiquid/silverback-x402-mcp.git"
+  },
+  "keywords": [
+    "mcp",
+    "x402",
+    "defi",
+    "ai-agents",
+    "micro-payments",
+    "usdc",
+    "base",
+    "solana",
+    "skale",
+    "keeta",
+    "silverback",
+    "swap",
+    "yield",
+    "trading",
+    "token-audit",
+    "whale-tracking",
+    "erc-8004",
+    "agentic-commerce"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsx src/index.ts",
+    "prepublishOnly": "npm run build"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1",
+    "@x402/fetch": "^2.2.0",
+    "@x402/evm": "^2.2.0",
+    "dotenv": "^16.4.7",
+    "viem": "^2.23.12",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3"
+  }
+}
