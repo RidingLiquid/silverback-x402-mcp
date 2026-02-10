@@ -1,11 +1,11 @@
-# @silverback/x402-mcp
+# silverback-x402-mcp
 
 MCP server for **Silverback DeFi Intelligence** — 26 paid endpoints via x402 micropayments. No API keys, no subscriptions. Your AI agent pays per call in USDC on Base.
 
 ## Quick Start
 
 ```bash
-PRIVATE_KEY=0xYourKey npx -y @silverback/x402-mcp
+PRIVATE_KEY=0xYourKey npx -y silverback-x402-mcp
 ```
 
 The server registers 26 DeFi intelligence tools over stdio. Your agent can immediately query swap routes, yield opportunities, token audits, whale movements, and more.
@@ -31,7 +31,7 @@ Add to `~/Library/Application Support/Claude/claude_desktop_config.json`:
   "mcpServers": {
     "silverback": {
       "command": "npx",
-      "args": ["-y", "@silverback/x402-mcp"],
+      "args": ["-y", "silverback-x402-mcp"],
       "env": {
         "PRIVATE_KEY": "0xYourPrivateKeyHere"
       }
@@ -51,7 +51,7 @@ Add to `.cursor/mcp.json` in your project:
   "mcpServers": {
     "silverback": {
       "command": "npx",
-      "args": ["-y", "@silverback/x402-mcp"],
+      "args": ["-y", "silverback-x402-mcp"],
       "env": {
         "PRIVATE_KEY": "0xYourPrivateKeyHere"
       }
@@ -63,7 +63,7 @@ Add to `.cursor/mcp.json` in your project:
 ## Claude Code
 
 ```bash
-claude mcp add silverback -- npx -y @silverback/x402-mcp
+claude mcp add silverback -- npx -y silverback-x402-mcp
 ```
 
 Set `PRIVATE_KEY` in your environment.
@@ -127,7 +127,7 @@ Set `PRIVATE_KEY` in your environment.
 AI Agent (Claude, Cursor, etc.)
   |  stdio JSON-RPC
   v
-@silverback/x402-mcp (local, has your wallet)
+silverback-x402-mcp (local, has your wallet)
   |  1. Tool call from agent
   |  2. HTTP request to Silverback API
   |  3. Server returns 402 Payment Required

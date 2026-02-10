@@ -1,11 +1,11 @@
 {
-  "name": "@silverback/x402-mcp",
+  "name": "silverback-x402-mcp",
   "version": "1.0.0",
   "description": "MCP server for Silverback DeFi — 26 intelligence endpoints via x402 micropayments. Swap routing, yield analysis, token audits, whale tracking, and more.",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "silverback-x402-mcp": "dist/index.js"
+    "silverback-mcp": "dist/index.js"
   },
   "files": [
     "dist/",
