@@ -17,7 +17,7 @@ interface ToolDef {
 }
 
 // ============================================================================
-// Tool Definitions — 26 x402 endpoints
+// Tool Definitions — 19 x402 endpoints
 // ============================================================================
 
 const TOOLS: ToolDef[] = [
@@ -135,14 +135,6 @@ const TOOLS: ToolDef[] = [
     schema: {},
   },
   {
-    name: 'dex_metrics',
-    description: 'Base DEX ecosystem metrics — total volume, TVL, gas usage, top pairs',
-    path: '/api/v1/dex-metrics',
-    method: 'GET',
-    price: '$0.002',
-    schema: {},
-  },
-  {
     name: 'trending_tokens',
     description: 'Trending tokens by chain from CoinGecko',
     path: '/api/v1/trending-tokens',
@@ -239,61 +231,8 @@ const TOOLS: ToolDef[] = [
     },
   },
 
-  // ── Keeta Blockchain Data ─────────────────────────────────────────────
-  {
-    name: 'keeta_network_stats',
-    description: 'Keeta network statistics — block height, TPS, active accounts',
-    path: '/api/v1/keeta/network-stats',
-    method: 'GET',
-    price: '$0.001',
-    schema: {},
-  },
-  {
-    name: 'keeta_account',
-    description: 'Keeta account info — balance, transaction history, delegation status',
-    path: '/api/v1/keeta/account',
-    method: 'GET',
-    price: '$0.001',
-    schema: {
-      address: z.string().describe('Keeta account address'),
-    },
-  },
-  {
-    name: 'keeta_representatives',
-    description: 'Keeta network representatives with voting weight and uptime',
-    path: '/api/v1/keeta/representatives',
-    method: 'GET',
-    price: '$0.001',
-    schema: {},
-  },
-  {
-    name: 'keeta_dex_pools',
-    description: 'Keeta DEX liquidity pools with TVL and volume',
-    path: '/api/v1/keeta/dex/pools',
-    method: 'GET',
-    price: '$0.001',
-    schema: {},
-  },
-  {
-    name: 'keeta_dex_prices',
-    description: 'Keeta DEX token prices with 24h change',
-    path: '/api/v1/keeta/dex/prices',
-    method: 'GET',
-    price: '$0.001',
-    schema: {},
-  },
-  {
-    name: 'keeta_dex_quote',
-    description: 'Keeta DEX swap quote with price impact and route',
-    path: '/api/v1/keeta/dex/quote',
-    method: 'POST',
-    price: '$0.001',
-    schema: {
-      tokenIn: z.string().describe('Input token address'),
-      tokenOut: z.string().describe('Output token address'),
-      amount: z.string().describe('Amount to swap'),
-    },
-  },
+  // Keeta data endpoints removed (Feb 2026) — SDK unstable
+  // Keeta USDC payment network still active
 ];
 
 // ============================================================================

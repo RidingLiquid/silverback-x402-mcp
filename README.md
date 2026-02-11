@@ -1,6 +1,6 @@
 # silverback-x402-mcp
 
-MCP server for **Silverback DeFi Intelligence** — 26 paid endpoints via x402 micropayments. No API keys, no subscriptions. Your AI agent pays per call in USDC on Base.
+MCP server for **Silverback DeFi Intelligence** — 19 paid endpoints via x402 micropayments. No API keys, no subscriptions. Your AI agent pays per call in USDC on Base.
 
 ## Quick Start
 
@@ -8,7 +8,7 @@ MCP server for **Silverback DeFi Intelligence** — 26 paid endpoints via x402 m
 PRIVATE_KEY=0xYourKey npx -y silverback-x402-mcp
 ```
 
-The server registers 26 DeFi intelligence tools over stdio. Your agent can immediately query swap routes, yield opportunities, token audits, whale movements, and more.
+The server registers 19 DeFi intelligence tools over stdio. Your agent can immediately query swap routes, yield opportunities, token audits, whale movements, and more.
 
 ## Requirements
 
@@ -68,7 +68,7 @@ claude mcp add silverback -- npx -y silverback-x402-mcp
 
 Set `PRIVATE_KEY` in your environment.
 
-## Available Tools (26)
+## Available Tools (19)
 
 ### Core DeFi Services
 
@@ -89,7 +89,6 @@ Set `PRIVATE_KEY` in your environment.
 | `top_protocols` | Top DeFi protocols on Base | $0.001 |
 | `top_coins` | Top cryptocurrencies by market cap | $0.001 |
 | `gas_price` | Current Base chain gas prices | $0.001 |
-| `dex_metrics` | Base DEX volume, TVL, top pairs | $0.002 |
 | `trending_tokens` | Trending tokens by chain | $0.001 |
 | `token_metadata` | Token price, market cap, description | $0.001 |
 | `correlation_matrix` | Token correlation for diversification | $0.005 |
@@ -109,17 +108,6 @@ Set `PRIVATE_KEY` in your environment.
 | Tool | Description | Price |
 |------|-------------|-------|
 | `chat` | AI DeFi assistant — ask anything about crypto | $0.05 |
-
-### Keeta Blockchain
-
-| Tool | Description | Price |
-|------|-------------|-------|
-| `keeta_network_stats` | Network stats (block height, TPS) | $0.001 |
-| `keeta_account` | Account info and balance | $0.001 |
-| `keeta_representatives` | Network representatives | $0.001 |
-| `keeta_dex_pools` | DEX liquidity pools | $0.001 |
-| `keeta_dex_prices` | DEX token prices | $0.001 |
-| `keeta_dex_quote` | DEX swap quote | $0.001 |
 
 ## How It Works
 

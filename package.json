@@ -1,7 +1,7 @@
 {
   "name": "silverback-x402-mcp",
-  "version": "1.0.0",
-  "description": "MCP server for Silverback DeFi — 26 intelligence endpoints via x402 micropayments. Swap routing, yield analysis, token audits, whale tracking, and more.",
+  "version": "1.1.0",
+  "description": "MCP server for Silverback DeFi — 19 intelligence endpoints via x402 micropayments. Swap routing, yield analysis, token audits, whale tracking, and more.",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
@@ -29,7 +29,6 @@
     "base",
     "solana",
     "skale",
-    "keeta",
     "silverback",
     "swap",
     "yield",
