@@ -17,7 +17,7 @@ interface ToolDef {
 }
 
 // ============================================================================
-// Tool Definitions — 19 x402 endpoints
+// Tool Definitions — 21 x402 endpoints
 // ============================================================================
 
 const TOOLS: ToolDef[] = [
@@ -228,6 +228,31 @@ const TOOLS: ToolDef[] = [
     price: '$0.05',
     schema: {
       message: z.string().describe('Your question or request'),
+    },
+  },
+
+  // ── Solana ──────────────────────────────────────────────────────────
+  {
+    name: 'jupiter_quote',
+    description: 'Jupiter DEX swap quote for Solana tokens — optimal route, price impact, fees',
+    path: '/api/v1/jupiter-quote',
+    method: 'GET',
+    price: '$0.002',
+    schema: {
+      inputMint: z.string().describe('Solana token mint address to swap from (e.g. SOL: So11111111111111111111111111111111111111112)'),
+      outputMint: z.string().describe('Solana token mint address to swap to (e.g. USDC: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v)'),
+      amount: z.string().describe('Amount in smallest unit (lamports for SOL, base units for SPL tokens)'),
+      slippageBps: z.number().optional().describe('Slippage tolerance in basis points (default: 50 = 0.5%)'),
+    },
+  },
+  {
+    name: 'solana_trending',
+    description: 'Trending tokens and pools on Solana by volume and activity',
+    path: '/api/v1/solana-trending',
+    method: 'GET',
+    price: '$0.001',
+    schema: {
+      limit: z.number().optional().describe('Number of results (default: 20, max: 50)'),
     },
   },
 

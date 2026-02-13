@@ -1,6 +1,6 @@
 # silverback-x402-mcp
 
-MCP server for **Silverback DeFi Intelligence** — 19 paid endpoints via x402 micropayments. No API keys, no subscriptions. Your AI agent pays per call in USDC on Base.
+MCP server for **Silverback DeFi Intelligence** — 21 paid endpoints via x402 micropayments. No API keys, no subscriptions. Your AI agent pays per call in USDC on Base.
 
 ## Quick Start
 
@@ -8,7 +8,7 @@ MCP server for **Silverback DeFi Intelligence** — 19 paid endpoints via x402 m
 PRIVATE_KEY=0xYourKey npx -y silverback-x402-mcp
 ```
 
-The server registers 19 DeFi intelligence tools over stdio. Your agent can immediately query swap routes, yield opportunities, token audits, whale movements, and more.
+The server registers 21 DeFi intelligence tools over stdio. Your agent can immediately query swap routes, yield opportunities, token audits, whale movements, and more.
 
 ## Requirements
 
@@ -68,7 +68,7 @@ claude mcp add silverback -- npx -y silverback-x402-mcp
 
 Set `PRIVATE_KEY` in your environment.
 
-## Available Tools (19)
+## Available Tools (21)
 
 ### Core DeFi Services
 
@@ -93,6 +93,13 @@ Set `PRIVATE_KEY` in your environment.
 | `token_metadata` | Token price, market cap, description | $0.001 |
 | `correlation_matrix` | Token correlation for diversification | $0.005 |
 | `arbitrage_scanner` | Cross-DEX arbitrage opportunities | $0.02 |
+
+### Solana
+
+| Tool | Description | Price |
+|------|-------------|-------|
+| `jupiter_quote` | Jupiter DEX swap quote — route, impact, fees | $0.002 |
+| `solana_trending` | Trending tokens/pools on Solana | $0.001 |
 
 ### Intelligence
 
