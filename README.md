@@ -1,6 +1,6 @@
 # silverback-x402-mcp
 
-MCP server for **Silverback DeFi Intelligence** — 21 paid endpoints via x402 micropayments. No API keys, no subscriptions. Your AI agent pays per call in USDC on Base.
+MCP server for **Silverback DeFi Intelligence** — 27 paid endpoints via x402 micropayments. No API keys, no subscriptions. Your AI agent pays per call in USDC on Base.
 
 ## Quick Start
 
@@ -8,7 +8,7 @@ MCP server for **Silverback DeFi Intelligence** — 21 paid endpoints via x402 m
 PRIVATE_KEY=0xYourKey npx -y silverback-x402-mcp
 ```
 
-The server registers 21 DeFi intelligence tools over stdio. Your agent can immediately query swap routes, yield opportunities, token audits, whale movements, and more.
+The server registers 27 DeFi intelligence tools over stdio. Your agent can immediately query swap routes, yield opportunities, token audits, whale movements, portfolio analytics, and more.
 
 ## Requirements
 
@@ -68,47 +68,53 @@ claude mcp add silverback -- npx -y silverback-x402-mcp
 
 Set `PRIVATE_KEY` in your environment.
 
-## Available Tools (21)
+## Available Tools (27)
 
 ### Core DeFi Services
 
 | Tool | Description | Price |
 |------|-------------|-------|
-| `swap_quote` | Optimal swap route with price impact on Base | $0.002 |
+| `swap_quote` | Optimal swap route with price impact on Base | $0.01 |
 | `swap` | Non-custodial Permit2 swap with EIP-712 signing | $0.05 |
-| `pool_analysis` | Liquidity pool analysis (TVL, volume, IL risk) | $0.005 |
-| `technical_analysis` | RSI, MACD, Bollinger Bands, support/resistance | $0.02 |
-| `defi_yield` | Yield opportunities on Aerodrome, Morpho, etc. | $0.02 |
+| `pool_analysis` | Liquidity pool analysis (TVL, volume, IL risk) | $0.01 |
+| `technical_analysis` | RSI, MACD, Bollinger Bands, pivot point S/R | $0.03 |
+| `defi_yield` | Yield opportunities on Aerodrome, Morpho, etc. | $0.03 |
 | `backtest` | Strategy backtesting with historical data | $0.10 |
 
 ### Market Data
 
 | Tool | Description | Price |
 |------|-------------|-------|
-| `top_pools` | Top liquidity pools by TVL and volume | $0.001 |
-| `top_protocols` | Top DeFi protocols on Base | $0.001 |
-| `top_coins` | Top cryptocurrencies by market cap | $0.001 |
-| `gas_price` | Current Base chain gas prices | $0.001 |
-| `trending_tokens` | Trending tokens by chain | $0.001 |
-| `token_metadata` | Token price, market cap, description | $0.001 |
-| `correlation_matrix` | Token correlation for diversification | $0.005 |
-| `arbitrage_scanner` | Cross-DEX arbitrage opportunities | $0.02 |
+| `top_pools` | Top liquidity pools by TVL and volume | $0.005 |
+| `top_protocols` | Top DeFi protocols on Base | $0.005 |
+| `top_coins` | Top cryptocurrencies by market cap | $0.005 |
+| `gas_price` | EIP-1559 gas prices, USD cost estimates, congestion | $0.005 |
+| `trending_tokens` | Trending tokens by chain | $0.005 |
+| `token_metadata` | Token price, market cap, description | $0.005 |
+| `correlation_matrix` | Token correlation for diversification | $0.01 |
+| `arbitrage_scanner` | Cross-DEX arbitrage (OpenOcean, 1inch, 0x) | $0.03 |
+| `price_history` | Historical price/volume over 1–365 days | $0.005 |
+| `market_overview` | Global market cap, BTC/ETH dominance, gainers/losers | $0.005 |
+| `protocol_fees` | Protocol fee revenue (24h/7d/30d) on Base | $0.01 |
 
 ### Solana
 
 | Tool | Description | Price |
 |------|-------------|-------|
-| `jupiter_quote` | Jupiter DEX swap quote — route, impact, fees | $0.002 |
-| `solana_trending` | Trending tokens/pools on Solana | $0.001 |
+| `jupiter_quote` | Jupiter DEX swap quote — route, impact, fees | $0.01 |
+| `solana_trending` | Trending tokens/pools on Solana | $0.005 |
 
 ### Intelligence
 
 | Tool | Description | Price |
 |------|-------------|-------|
-| `token_audit` | Security audit: contract, holders, rug risk | $0.01 |
-| `whale_moves` | Whale transfers and accumulation patterns | $0.01 |
-| `agent_reputation` | ERC-8004 agent reputation scores | $0.001 |
-| `agent_discover` | Discover registered agents by capability | $0.002 |
+| `token_audit` | Security audit: contract, holders, deployer reputation, risk score | $0.02 |
+| `whale_moves` | Whale transfers and accumulation patterns | $0.02 |
+| `holder_analytics` | Token holder distribution and concentration metrics | $0.01 |
+| `wallet_portfolio` | Wallet ERC-20 holdings with USD values | $0.02 |
+| `token_compare` | Side-by-side comparison of two tokens | $0.01 |
+| `agent_reputation` | ERC-8004 agent reputation scores | $0.005 |
+| `agent_discover` | Discover registered agents by capability | $0.01 |
 
 ### Chat
 

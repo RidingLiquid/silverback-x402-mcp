@@ -17,7 +17,7 @@ interface ToolDef {
 }
 
 // ============================================================================
-// Tool Definitions — 21 x402 endpoints
+// Tool Definitions — 27 x402 endpoints (prices synced Feb 20, 2026)
 // ============================================================================
 
 const TOOLS: ToolDef[] = [
@@ -27,7 +27,7 @@ const TOOLS: ToolDef[] = [
     description: 'Get optimal swap route with price impact analysis on Base chain',
     path: '/api/v1/swap-quote',
     method: 'POST',
-    price: '$0.002',
+    price: '$0.01',
     schema: {
       tokenIn: z.string().describe('Input token address or symbol (e.g. "USDC", "0x833589...")'),
       tokenOut: z.string().describe('Output token address or symbol (e.g. "ETH", "WETH")'),
@@ -53,7 +53,7 @@ const TOOLS: ToolDef[] = [
     description: 'Deep liquidity pool analysis with TVL, volume, fees, and impermanent loss risk',
     path: '/api/v1/pool-analysis',
     method: 'POST',
-    price: '$0.005',
+    price: '$0.01',
     schema: {
       pool: z.string().optional().describe('Pool address to analyze'),
       token: z.string().optional().describe('Token to find pools for'),
@@ -61,13 +61,13 @@ const TOOLS: ToolDef[] = [
   },
   {
     name: 'technical_analysis',
-    description: 'Technical analysis with RSI, MACD, Bollinger Bands, support/resistance levels',
+    description: 'Technical analysis with RSI, MACD, Bollinger Bands, pivot point S/R levels',
     path: '/api/v1/technical-analysis',
     method: 'POST',
-    price: '$0.02',
+    price: '$0.03',
     schema: {
       token: z.string().describe('Token symbol or address to analyze'),
-      timeframe: z.string().optional().describe('Timeframe: 1h, 4h, 1d (default: 4h)'),
+      timeframe: z.string().optional().describe('Timeframe in days (default: 7)'),
     },
   },
   {
@@ -75,7 +75,7 @@ const TOOLS: ToolDef[] = [
     description: 'DeFi yield opportunities across Aerodrome, Morpho, and other Base protocols',
     path: '/api/v1/defi-yield',
     method: 'POST',
-    price: '$0.02',
+    price: '$0.03',
     schema: {
       token: z.string().optional().describe('Token to find yield for (optional — omit for top yields)'),
       riskTolerance: z.enum(['low', 'medium', 'high']).optional().describe('Risk tolerance level'),
@@ -101,7 +101,7 @@ const TOOLS: ToolDef[] = [
     description: 'Top liquidity pools on Base by TVL and volume',
     path: '/api/v1/top-pools',
     method: 'GET',
-    price: '$0.001',
+    price: '$0.005',
     schema: {
       limit: z.number().optional().describe('Number of pools (default 10)'),
     },
@@ -111,7 +111,7 @@ const TOOLS: ToolDef[] = [
     description: 'Top DeFi protocols on Base by TVL',
     path: '/api/v1/top-protocols',
     method: 'GET',
-    price: '$0.001',
+    price: '$0.005',
     schema: {
       limit: z.number().optional().describe('Number of protocols (default 10)'),
     },
@@ -121,17 +121,17 @@ const TOOLS: ToolDef[] = [
     description: 'Top cryptocurrencies by market cap with price and 24h change',
     path: '/api/v1/top-coins',
     method: 'GET',
-    price: '$0.001',
+    price: '$0.005',
     schema: {
       limit: z.number().optional().describe('Number of coins (default 20)'),
     },
   },
   {
     name: 'gas_price',
-    description: 'Current Base chain gas prices in gwei',
+    description: 'Base chain gas prices with EIP-1559 data, USD cost estimates, and congestion indicator',
     path: '/api/v1/gas-price',
     method: 'GET',
-    price: '$0.001',
+    price: '$0.005',
     schema: {},
   },
   {
@@ -139,7 +139,7 @@ const TOOLS: ToolDef[] = [
     description: 'Trending tokens by chain from CoinGecko',
     path: '/api/v1/trending-tokens',
     method: 'GET',
-    price: '$0.001',
+    price: '$0.005',
     schema: {
       chain: z.string().optional().describe('Chain filter (default: base)'),
     },
@@ -149,7 +149,7 @@ const TOOLS: ToolDef[] = [
     description: 'Token metadata including price, market cap, description, and links',
     path: '/api/v1/token-metadata',
     method: 'GET',
-    price: '$0.001',
+    price: '$0.005',
     schema: {
       token: z.string().describe('Token symbol or CoinGecko ID'),
     },
@@ -158,30 +158,51 @@ const TOOLS: ToolDef[] = [
     name: 'correlation_matrix',
     description: 'Price correlation matrix between tokens for portfolio diversification',
     path: '/api/v1/correlation-matrix',
-    method: 'GET',
-    price: '$0.005',
+    method: 'POST',
+    price: '$0.01',
     schema: {
-      tokens: z.string().optional().describe('Comma-separated token symbols (default: top tokens)'),
+      tokens: z.array(z.string()).describe('Array of token symbols or CoinGecko IDs (e.g. ["bitcoin", "ethereum", "solana"])'),
     },
   },
   {
     name: 'arbitrage_scanner',
-    description: 'Cross-DEX arbitrage opportunity scanner on Base',
+    description: 'Cross-DEX arbitrage scanner — OpenOcean, 1inch, 0x Protocol, with gas cost analysis',
     path: '/api/v1/arbitrage-scanner',
-    method: 'GET',
-    price: '$0.02',
+    method: 'POST',
+    price: '$0.03',
     schema: {
-      minProfit: z.number().optional().describe('Minimum profit threshold in USD'),
+      tokenIn: z.string().describe('Input token symbol (e.g. "WETH")'),
+      tokenOut: z.string().describe('Output token symbol (e.g. "USDC")'),
+      amount: z.string().optional().describe('Amount to scan (default: "1")'),
     },
+  },
+  {
+    name: 'price_history',
+    description: 'Historical price, volume, and market cap for a token over 1–365 days',
+    path: '/api/v1/price-history',
+    method: 'GET',
+    price: '$0.005',
+    schema: {
+      token: z.string().describe('Token symbol or CoinGecko ID (e.g. "ethereum", "bitcoin")'),
+      days: z.number().optional().describe('Number of days of history (default: 7, max: 365)'),
+    },
+  },
+  {
+    name: 'market_overview',
+    description: 'Global crypto market snapshot — total market cap, BTC/ETH dominance, top gainers/losers',
+    path: '/api/v1/market-overview',
+    method: 'GET',
+    price: '$0.005',
+    schema: {},
   },
 
   // ── Intelligence Services ─────────────────────────────────────────────
   {
     name: 'token_audit',
-    description: 'Token security audit — contract analysis, holder distribution, liquidity locks, rug risk',
+    description: 'Token security audit — contract analysis, holder distribution, deployer reputation, risk score',
     path: '/api/v1/token-audit',
     method: 'POST',
-    price: '$0.01',
+    price: '$0.02',
     schema: {
       token: z.string().describe('Token address or symbol to audit'),
     },
@@ -191,9 +212,53 @@ const TOOLS: ToolDef[] = [
     description: 'Whale transaction tracker — large transfers, accumulation/distribution patterns',
     path: '/api/v1/whale-moves',
     method: 'POST',
-    price: '$0.01',
+    price: '$0.02',
     schema: {
       token: z.string().describe('Token to track whale activity for'),
+      minValueUsd: z.number().optional().describe('Minimum transfer value in USD (default: 50000)'),
+      limit: z.number().optional().describe('Number of results (default: 10)'),
+    },
+  },
+  {
+    name: 'holder_analytics',
+    description: 'Token holder distribution — top holders, concentration metrics, holder count',
+    path: '/api/v1/holder-analytics',
+    method: 'POST',
+    price: '$0.01',
+    schema: {
+      token: z.string().describe('Token address on Base (e.g. "0x833589fCD6eDb6E08f4c7C32D4f71b54bdA02913")'),
+      limit: z.number().optional().describe('Number of top holders to return (default: 20, max: 100)'),
+    },
+  },
+  {
+    name: 'wallet_portfolio',
+    description: 'Wallet ERC-20 holdings on Base with USD values and total portfolio value',
+    path: '/api/v1/wallet-portfolio',
+    method: 'POST',
+    price: '$0.02',
+    schema: {
+      address: z.string().describe('Wallet address to analyze (e.g. "0xD344...")'),
+    },
+  },
+  {
+    name: 'token_compare',
+    description: 'Side-by-side comparison of two tokens — market cap, volume, supply, relative metrics',
+    path: '/api/v1/token-compare',
+    method: 'POST',
+    price: '$0.01',
+    schema: {
+      tokenA: z.string().describe('First token symbol or CoinGecko ID'),
+      tokenB: z.string().describe('Second token symbol or CoinGecko ID'),
+    },
+  },
+  {
+    name: 'protocol_fees',
+    description: '24h/7d/30d fee revenue for top Base protocols (Aerodrome, Uniswap, Morpho, etc.)',
+    path: '/api/v1/protocol-fees',
+    method: 'POST',
+    price: '$0.01',
+    schema: {
+      limit: z.number().optional().describe('Number of protocols (default: 20)'),
     },
   },
   {
@@ -201,7 +266,7 @@ const TOOLS: ToolDef[] = [
     description: 'Query ERC-8004 agent reputation scores and on-chain feedback',
     path: '/api/v1/agent-reputation',
     method: 'POST',
-    price: '$0.001',
+    price: '$0.005',
     schema: {
       agentId: z.string().describe('Agent ID or address to query'),
       chainId: z.number().optional().describe('Chain ID (default: 8453 for Base)'),
@@ -209,10 +274,10 @@ const TOOLS: ToolDef[] = [
   },
   {
     name: 'agent_discover',
-    description: 'Discover ERC-8004 registered agents by capability tags',
+    description: 'Discover ERC-8004 registered agents by capability tags (cached, faster)',
     path: '/api/v1/agent-discover',
     method: 'POST',
-    price: '$0.002',
+    price: '$0.01',
     schema: {
       tags: z.string().optional().describe('Comma-separated capability tags to search'),
       chainId: z.number().optional().describe('Chain ID (default: 8453 for Base)'),
@@ -237,7 +302,7 @@ const TOOLS: ToolDef[] = [
     description: 'Jupiter DEX swap quote for Solana tokens — optimal route, price impact, fees',
     path: '/api/v1/jupiter-quote',
     method: 'GET',
-    price: '$0.002',
+    price: '$0.01',
     schema: {
       inputMint: z.string().describe('Solana token mint address to swap from (e.g. SOL: So11111111111111111111111111111111111111112)'),
       outputMint: z.string().describe('Solana token mint address to swap to (e.g. USDC: EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v)'),
@@ -250,14 +315,11 @@ const TOOLS: ToolDef[] = [
     description: 'Trending tokens and pools on Solana by volume and activity',
     path: '/api/v1/solana-trending',
     method: 'GET',
-    price: '$0.001',
+    price: '$0.005',
     schema: {
       limit: z.number().optional().describe('Number of results (default: 20, max: 50)'),
     },
   },
-
-  // Keeta data endpoints removed (Feb 2026) — SDK unstable
-  // Keeta USDC payment network still active
 ];
 
 // ============================================================================
